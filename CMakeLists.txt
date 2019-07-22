@@ -36,6 +36,5 @@ if (NOT LIBSSH2_FOUND)
 	MESSAGE(STATUS "LIBSSH2 not found. Set CMAKE_PREFIX_PATH if it is installed outside of the default search path.")
 ENDIF()
 
-add_definitions(-fobjc-arc)
-
 add_subdirectory(NMSSH)
+

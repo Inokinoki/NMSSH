@@ -11,7 +11,20 @@ set(nmssh_SRCS
 	${CMAKE_CURRENT_SOURCE_DIR}/Config/NMSSHLogger.m
 )
 
+set(nmssh_HEADERS
+	${CMAKE_CURRENT_SOURCE_DIR}/NMSSHSession.h
+	${CMAKE_CURRENT_SOURCE_DIR}/NMSSHChannel.h
+	${CMAKE_CURRENT_SOURCE_DIR}/NMSFTP.h
+	${CMAKE_CURRENT_SOURCE_DIR}/NMSFTPFile.h
+	${CMAKE_CURRENT_SOURCE_DIR}/NMSSHConfig.h
+	${CMAKE_CURRENT_SOURCE_DIR}/NMSSHHostConfig.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/Config/NMSSHLogger.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/Protocols/NMSSHSessionDelegate.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Protocols/NMSSHChannelDelegate.h
+)
+
 add_library(nmssh ${nmssh_SRCS})
+set_target_properties(nmssh PROPERTIES PUBLIC_HEADER "${nmssh_HEADERS}")
 
 target_include_directories(nmssh PUBLIC 	
 	${CMAKE_CURRENT_SOURCE_DIR}
@@ -21,3 +34,11 @@ target_include_directories(nmssh PUBLIC
 )
 
 target_link_libraries(nmssh ${LIBSSH2_LIBRARIES})
+
+add_definitions(-fobjc-arc)
+
+install(TARGETS nmssh
+	ARCHIVE DESTINATION lib
+	LIBRARY DESTINATION lib
+	PUBLIC_HEADER DESTINATION include
+)
