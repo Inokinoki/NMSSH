@@ -33,7 +33,11 @@ target_include_directories(nmssh PUBLIC
 	${LIBSSH2_INCLUDE_DIRS}
 )
 
-target_link_libraries(nmssh ${LIBSSH2_LIBRARIES})
+target_link_libraries(nmssh ${LIBSSH2_LIBRARIES}
+	"-framework CoreFoundation"
+	"-framework CoreServices"
+	"-framework Foundation"
+)
 
 add_definitions(-fobjc-arc)
 
