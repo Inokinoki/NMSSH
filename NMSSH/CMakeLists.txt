@@ -1,5 +1,3 @@
-project(nmssh)
-
 set(nmssh_SRCS
 	NMSFTP.m
 	NMSFTPFile.m
@@ -18,8 +16,8 @@ set(nmssh_HEADERS
 	${CMAKE_CURRENT_SOURCE_DIR}/NMSFTPFile.h
 	${CMAKE_CURRENT_SOURCE_DIR}/NMSSHConfig.h
 	${CMAKE_CURRENT_SOURCE_DIR}/NMSSHHostConfig.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/Config/NMSSHLogger.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/Protocols/NMSSHSessionDelegate.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Config/NMSSHLogger.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Protocols/NMSSHSessionDelegate.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Protocols/NMSSHChannelDelegate.h
 )
 
@@ -41,8 +39,11 @@ target_link_libraries(nmssh ${LIBSSH2_LIBRARIES}
 
 add_definitions(-fobjc-arc)
 
-install(TARGETS nmssh
+install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Targets
 	ARCHIVE DESTINATION lib
 	LIBRARY DESTINATION lib
 	PUBLIC_HEADER DESTINATION include
+)
+install(EXPORT ${PROJECT_NAME}Targets
+	DESTINATION lib/cmake/${PROJECT_NAME}
 )
